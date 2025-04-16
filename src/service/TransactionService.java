@@ -15,7 +15,7 @@ public class TransactionService {
         }
         System.out.println("Available bank Accounts:");
         for(int i=0;i<accounts.size();i++){
-            System.out.println((i+1)+". "+accounts.get(i));
+            System.out.println((i+1)+". Account: "+accounts.get(i)+"\t rs."+BankService.getBalance(con,accounts.get(i)));
         }
         System.out.print("Which account do you want to choose: ");
         int ch=sc.nextInt();
@@ -144,6 +144,7 @@ public class TransactionService {
         ps.setInt(1,uid);
         ps.setInt(2,uid);
         ResultSet rs=ps.executeQuery();
+        System.out.println("----- Your Recent Transactions -----");
         while (rs.next()){
             int tid = rs.getInt("t_id");
             String type = rs.getString("type");
@@ -157,7 +158,6 @@ public class TransactionService {
             String direction = (sender == uid)
                     ? "sent to UID " + receiver
                     : "received from UID " + sender;
-            System.out.println("----- Your Recent Transactions -----");
             System.out.printf("[TXN#%d] ₹%.2f %s | Method: %s | Status: %s | Date: %s\n",
                     tid, amt, direction, method, status, time.toString());
         }

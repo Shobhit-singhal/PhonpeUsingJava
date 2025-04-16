@@ -14,7 +14,8 @@ public class BankService {
         String ifsc_code=sc.next();
         int acc_no=insertBank(con,bankName,ifsc_code,uid);
         if(acc_no!=-1){
-            return linkBankToUpi(con,acc_no);
+            linkBankToUpi(con,acc_no);
+            return acc_no;
         }
         return -1;
     }
